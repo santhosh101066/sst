@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Stream</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="video-container">
+    <iframe 
+      src="https://cdn.crichdplays.ru/embed2.php?id=starsp1tam"
+      allowfullscreen
+      allow="fullscreen"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      name="iframe_a">
+    </iframe>
+  </div>
+</body>
+</html>
