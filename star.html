@@ -43,4 +43,20 @@
     </iframe>
   </div>
 </body>
+  <script>
+  // Override window.open to block new tabs/popups
+  window.open = function () {
+    console.warn("Blocked a popup or new tab.");
+    return null;
+  };
+
+  // Prevent anchor tag from opening in new tab
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a");
+    if (link && link.target === "_blank") {
+      e.preventDefault();
+      console.warn("Blocked link from opening in new tab:", link.href);
+    }
+  });
+</script>
 </html>
