@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playlist Player</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #eee; margin: 0; padding: 0; display: flex; }
+    #playlist { width: 250px; padding: 1rem; border-right: 1px solid #444; background: #1a1a1a; height: 100vh; overflow-y: auto; }
+    #playlist button { display: block; margin: 0.5rem 0; width: 100%; background: #333; color: #fff; border: none; padding: 0.5rem; cursor: pointer; text-align: left; }
+    #player { flex: 1; display: flex; align-items: center; justify-content: center; }
+    video { width: 90%; max-height: 90vh; background: #000; }
+  </style>
+</head>
+<body>
+
+<div id="playlist">
+  <h3>Playlist</h3>
+  <div id="list">Loading...</div>
+</div>
+
+<div id="player">
+  <video id="video" controls autoplay></video>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  const playlistUrl = 'https://allinonereborn.com/tplay.m3u';
+  const video = document.getElementById('video');
+  const listContainer = document.getElementById('list');
+  let hls;
+
+  async function loadPlaylist() {
+    try {
+      const response = await fetch(playlistUrl);
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim() && !line.startsWith('#'));
+
+      listContainer.innerHTML = '';
+
+      lines.forEach((line, index) => {
+        const btn = document.createElement('button');
+        btn.textContent = `Stream ${index + 1}`;
+        btn.onclick = () => playStream(line.trim());
+        listContainer.appendChild(btn);
+      });
+
+      if (lines.length) {
+        playStream(lines[0].trim()); // auto-play first item
+      }
+    } catch (e) {
+      listContainer.innerHTML = 'Failed to load playlist.';
+      console.error(e);
+    }
+  }
+
+  function playStream(url) {
+    if (hls) {
+      hls.destroy();
+    }
+
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+      video.addEventListener('loadedmetadata', () => video.play());
+    } else {
+      alert("Your browser doesn't support HLS playback.");
+    }
+  }
+
+  loadPlaylist();
+</script>
+
+</body>
+</html>
