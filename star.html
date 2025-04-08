@@ -28,11 +28,28 @@
       border: none;
     }
   </style>
+  <script>
+    // Override window.open to block new tabs/popups
+    window.open = function () {
+      console.warn("Blocked a popup or new tab.");
+      return null;
+    };
+  
+    // Prevent anchor tag from opening in new tab
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest("a");
+      if (link && link.target === "_blank") {
+        e.preventDefault();
+        console.warn("Blocked link from opening in new tab:", link.href);
+      }
+    });
+  </script>
 </head>
 
 <body>
   <div class="video-container">
     <iframe 
+    id="myIframe"
       src="https://cdn.crichdplays.ru/embed2.php?id=starsp1tam"
       allowfullscreen
       allow="fullscreen"
@@ -42,21 +59,27 @@
       name="iframe_a">
     </iframe>
   </div>
-</body>
   <script>
-  // Override window.open to block new tabs/popups
-  window.open = function () {
-    console.warn("Blocked a popup or new tab.");
-    return null;
-  };
-
-  // Prevent anchor tag from opening in new tab
-  document.addEventListener("click", function (e) {
-    const link = e.target.closest("a");
-    if (link && link.target === "_blank") {
-      e.preventDefault();
-      console.warn("Blocked link from opening in new tab:", link.href);
-    }
-  });
-</script>
+    const iframe = document.getElementById("myIframe");
+    iframe.onload = () => {
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      const script = iframeDoc.createElement("script");
+      script.textContent = `
+        window.open = function () {
+          console.warn("Blocked new tab in iframe.");
+          return null;
+        };
+        document.addEventListener("click", function (e) {
+          const link = e.target.closest("a");
+          if (link && link.target === "_blank") {
+            e.preventDefault();
+            console.warn("Blocked _blank link");
+          }
+        });
+      `;
+      iframeDoc.body.appendChild(script);
+    };
+  </script>
+</body>
+  
 </html>
