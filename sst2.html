@@ -1,47 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Custom HLS Player</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2025 Live Streaming</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #000000, #1a237e);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loader styles */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000, #1a237e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #ffffff33;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .channel-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+        .channel-card {
+            background: linear-gradient(145deg, #2c2c2c, #1e1e1e);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .channel-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        .channel-card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .channel-name {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            width: 100px;
+        }
+        #video-container {
+            margin: 20px auto;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            background: url('https://i.ibb.co/x8rCVq3k/Screenshot-2025-04-04-124347.png') center/cover no-repeat;
+        }
+        #quality-selector {
+            margin-top: 10px;
+            padding: 5px;
+            background: #1e1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<body style="background: black; display: flex; justify-content: center; align-items: center; height: 100vh;">
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
 
-<video id="video" controls style="width: 80%; max-height: 90vh;"></video>
+    <h1>IPL 2025 Live Streaming</h1>
+    <div id="video-container">
+        <video id="video" controls poster="https://i.ibb.co/x8rCVq3k/Screenshot-2025-04-04-124347.png"></video>
+        <select id="quality-selector"></select>
+    </div>
+    <div class="channel-grid" id="channels"></div>
 
-<script>
-  const rawUrl = `https://amit-1.allinonereborn.in/tataplay2882/manifest.php?id=1187`;
-  const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.69.69.69 YGX/537.36',
-    'Origin': 'https://watch.tataplay.com',
-    'Referer': 'https://watch.tataplay.com'
-  };
-
-  const video = document.getElementById('video');
-
-  async function loadStream() {
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-
-      // Intercept loader to inject headers
-      hls.config.xhrSetup = function (xhr, url) {
-        xhr.setRequestHeader('User-Agent', headers['User-Agent']);
-        xhr.setRequestHeader('Origin', headers['Origin']);
-        xhr.setRequestHeader('Referer', headers['Referer']);
-      };
-
-      hls.loadSource(rawUrl);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = rawUrl;
-      video.play();
-    } else {
-      alert("Browser doesn't support HLS");
-    }
-  }
-
-  loadStream();
-</script>
+    <script>
+        const _0x3cb77d=_0x45f5;(function(_0x48110e,_0x2ed887){const _0x20e9fe=_0x45f5,_0x3ae1f1=_0x48110e();while(!![]){try{const _0x6648f5=parseInt(_0x20e9fe(0x12f))/(0x1b59+-0x6b*-0x1e+0xa*-0x3fd)*(parseInt(_0x20e9fe(0x11f))/(-0x829*0x2+0x272+-0x6f1*-0x2))+parseInt(_0x20e9fe(0x15f))/(0x2c6*0x9+0x128*-0x1f+-0xae5*-0x1)+parseInt(_0x20e9fe(0x134))/(-0x2*0xc28+-0x1c9*-0x6+0xd9e)+parseInt(_0x20e9fe(0x153))/(0x1339+-0xad*-0x33+0x35ab*-0x1)+-parseInt(_0x20e9fe(0x160))/(0x1*-0x17ff+-0x1*0xbb2+0x23b7)+parseInt(_0x20e9fe(0x137))/(-0x2658+0x1*0xf2b+0x3de*0x6)+parseInt(_0x20e9fe(0x13d))/(0x67*0x45+0x25bf*-0x1+0xa04)*(-parseInt(_0x20e9fe(0x147))/(-0x5*-0x251+-0x10d6*-0x1+-0xe*0x207));if(_0x6648f5===_0x2ed887)break;else _0x3ae1f1['push'](_0x3ae1f1['shift']());}catch(_0x363525){_0x3ae1f1['push'](_0x3ae1f1['shift']());}}}(_0x39f2,-0x189bf*0x2+0x1337c+-0x3d*-0xfe9),window[_0x3cb77d(0x15b)+_0x3cb77d(0x139)](_0x3cb77d(0x10a),()=>{const _0x2f2b34=_0x3cb77d,_0x46d376={'niNLF':_0x2f2b34(0x140),'ZrrMV':_0x2f2b34(0x11e)},_0x324c9d=document[_0x2f2b34(0x126)+_0x2f2b34(0x116)](_0x46d376[_0x2f2b34(0x15d)]);_0x324c9d[_0x2f2b34(0x142)][_0x2f2b34(0x151)](_0x46d376[_0x2f2b34(0x110)]);}));const channels=[{'name':_0x3cb77d(0x15e)+_0x3cb77d(0x13b),'url':_0x3cb77d(0x104)+_0x3cb77d(0x130)+_0x3cb77d(0x119)+_0x3cb77d(0x148)+_0x3cb77d(0x162)+_0x3cb77d(0x131)+_0x3cb77d(0x117)+_0x3cb77d(0x145)+_0x3cb77d(0x125)+_0x3cb77d(0x121)+_0x3cb77d(0x129)+_0x3cb77d(0x10c)+_0x3cb77d(0x132)+_0x3cb77d(0x106)+_0x3cb77d(0x10d)+_0x3cb77d(0x114),'logo':_0x3cb77d(0x144)+_0x3cb77d(0x14d)+_0x3cb77d(0x15a)+_0x3cb77d(0x102)+_0x3cb77d(0x163)},{'name':_0x3cb77d(0x103)+'NG','url':_0x3cb77d(0x104)+_0x3cb77d(0x130)+_0x3cb77d(0x136)+_0x3cb77d(0x148)+_0x3cb77d(0x162)+_0x3cb77d(0x14f)+_0x3cb77d(0x117)+_0x3cb77d(0x107)+_0x3cb77d(0x125)+_0x3cb77d(0x121)+_0x3cb77d(0x129)+_0x3cb77d(0x10c)+_0x3cb77d(0x132)+_0x3cb77d(0x106)+_0x3cb77d(0x10d)+_0x3cb77d(0x114),'logo':_0x3cb77d(0x144)+_0x3cb77d(0x14d)+_0x3cb77d(0x15a)+_0x3cb77d(0x102)+_0x3cb77d(0x163)}],channelsContainer=document[_0x3cb77d(0x126)+_0x3cb77d(0x116)](_0x3cb77d(0x109)),video=document[_0x3cb77d(0x126)+_0x3cb77d(0x116)](_0x3cb77d(0x108)),qualitySelector=document[_0x3cb77d(0x126)+_0x3cb77d(0x116)](_0x3cb77d(0x12b)+_0x3cb77d(0x12a));function _0x39f2(){const _0x1aea1e=['CmVtn','https://i.','2025/hin/1','TLdBw','440226rkUaTH','cinema.com','TblVH','height','ion','textConten','ibb.co/jvS','display','2117030/in','flex','add','channel-na','39665NxAyQw','div','levels','FnSoF','alignItems','yyLNq','Events','MZGbp/aa2v','addEventLi','currentLev','niNLF','TATA\x20IPL\x20H','74274zbrrFN','686676HUAtHh','url','/hls/live/','afqglu.png','4pr19c5hfi','TATA\x20IPL\x20E','https://pr','hzLFZ','49011april','2025/eng/1','video','channels','load','name','b0944cfb66','2025/maste','ffMAS','ent','ZrrMV','column','value','MANIFEST_P','r.m3u8','forEach','ById','allow-ipl-','destroy','hin-cf.jio','alt','createElem','option','loadSource','hidden','2678whARUx','img','15mindvrm0','attachMedi','logo','MVWZs','540040249/','getElement','flexDirect','play','196aee80e6','lector','quality-se','innerHTML','center','style','22fiutuS','od-sports-','2117033/in','338cda8d9b','onclick','184300KCJKOC','ARSED','eng-cf.jio','1607347ynanle','umBbt','stener','src','INDI','wEpiL','16szlaKK','channel-ca','appendChil','loader','change','classList'];_0x39f2=function(){return _0x1aea1e;};return _0x39f2();}let hls;function _0x45f5(_0x5f1d41,_0x2dca2a){const _0xd4714b=_0x39f2();return _0x45f5=function(_0x1c4898,_0x5e49e0){_0x1c4898=_0x1c4898-(0x1*-0x509+0x17f3+0x11e8*-0x1);let _0x478032=_0xd4714b[_0x1c4898];return _0x478032;},_0x45f5(_0x5f1d41,_0x2dca2a);}function loadStream(_0x5850e6){const _0x366ad9=_0x3cb77d,_0xe1933a={'hzLFZ':_0x366ad9(0x11c),'wEpiL':function(_0x53c8de,_0x566946){return _0x53c8de+_0x566946;}};hls&&hls[_0x366ad9(0x118)](),hls=new Hls(),hls[_0x366ad9(0x11d)](_0x5850e6),hls[_0x366ad9(0x122)+'a'](video),hls['on'](Hls[_0x366ad9(0x159)][_0x366ad9(0x113)+_0x366ad9(0x135)],function(){const _0x49a601=_0x366ad9;video[_0x49a601(0x128)](),qualitySelector[_0x49a601(0x12c)]='',hls[_0x49a601(0x155)][_0x49a601(0x115)]((_0x3ec026,_0x5ae450)=>{const _0x4e6c82=_0x49a601,_0x252417=document[_0x4e6c82(0x11b)+_0x4e6c82(0x10f)](_0xe1933a[_0x4e6c82(0x105)]);_0x252417[_0x4e6c82(0x112)]=_0x5ae450,_0x252417[_0x4e6c82(0x14c)+'t']=_0xe1933a[_0x4e6c82(0x13c)](_0x3ec026[_0x4e6c82(0x14a)],'p'),qualitySelector[_0x4e6c82(0x13f)+'d'](_0x252417);});});}qualitySelector[_0x3cb77d(0x15b)+_0x3cb77d(0x139)](_0x3cb77d(0x141),function(){const _0x41109b=_0x3cb77d,_0x14e72e={'ffMAS':function(_0x49f2a6,_0x2b4e85){return _0x49f2a6(_0x2b4e85);}};hls&&(hls[_0x41109b(0x15c)+'el']=_0x14e72e[_0x41109b(0x10e)](parseInt,this[_0x41109b(0x112)]));}),channels[_0x3cb77d(0x115)](_0x4c8f32=>{const _0x53c7f0=_0x3cb77d,_0xcf1e98={'TblVH':_0x53c7f0(0x154),'yyLNq':_0x53c7f0(0x150),'FnSoF':_0x53c7f0(0x111),'CmVtn':_0x53c7f0(0x12d),'MVWZs':_0x53c7f0(0x13e)+'rd','umBbt':_0x53c7f0(0x120),'TLdBw':_0x53c7f0(0x152)+'me'},_0x15581d=document[_0x53c7f0(0x11b)+_0x53c7f0(0x10f)](_0xcf1e98[_0x53c7f0(0x149)]);_0x15581d[_0x53c7f0(0x12e)][_0x53c7f0(0x14e)]=_0xcf1e98[_0x53c7f0(0x158)],_0x15581d[_0x53c7f0(0x12e)][_0x53c7f0(0x127)+_0x53c7f0(0x14b)]=_0xcf1e98[_0x53c7f0(0x156)],_0x15581d[_0x53c7f0(0x12e)][_0x53c7f0(0x157)]=_0xcf1e98[_0x53c7f0(0x143)];const _0x251abf=document[_0x53c7f0(0x11b)+_0x53c7f0(0x10f)](_0xcf1e98[_0x53c7f0(0x149)]);_0x251abf[_0x53c7f0(0x142)][_0x53c7f0(0x151)](_0xcf1e98[_0x53c7f0(0x124)]),_0x251abf[_0x53c7f0(0x133)]=()=>loadStream(_0x4c8f32[_0x53c7f0(0x161)]);const _0x35c507=document[_0x53c7f0(0x11b)+_0x53c7f0(0x10f)](_0xcf1e98[_0x53c7f0(0x138)]);_0x35c507[_0x53c7f0(0x13a)]=_0x4c8f32[_0x53c7f0(0x123)],_0x35c507[_0x53c7f0(0x11a)]=_0x4c8f32[_0x53c7f0(0x10b)];const _0x9c817=document[_0x53c7f0(0x11b)+_0x53c7f0(0x10f)](_0xcf1e98[_0x53c7f0(0x149)]);_0x9c817[_0x53c7f0(0x142)][_0x53c7f0(0x151)](_0xcf1e98[_0x53c7f0(0x146)]),_0x9c817[_0x53c7f0(0x14c)+'t']=_0x4c8f32[_0x53c7f0(0x10b)],_0x251abf[_0x53c7f0(0x13f)+'d'](_0x35c507),_0x15581d[_0x53c7f0(0x13f)+'d'](_0x251abf),_0x15581d[_0x53c7f0(0x13f)+'d'](_0x9c817),channelsContainer[_0x53c7f0(0x13f)+'d'](_0x15581d);});
+    </script>
 </body>
 </html>
