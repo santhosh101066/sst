@@ -47,7 +47,6 @@
     </style>
 </head>
 
-
 <body>
     
 
@@ -57,7 +56,7 @@
     <script type="text/javascript">
         jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
         jwplayer("player-container").setup({
-            file: "https://ABGQJFUAAAAAAAAMO5QR4UQ52BT7T.0378b59d42e24feaadb1b9d03df19509.emt.cf.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/sx7obpmqpr/out/v1/22324a8b1b164b40ba9f88c1e6c1f19e/cenc.mpd",
+            file: "https://ABGQJFUAAAAAAAAMDH3BR2GHB2LCP.c57c5031deac4c2f947c8e708c8563d1.emt.cf.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/lzbmfghde0/out/v1/c887145d8d8c4524afd2d37a2f22cd73/cenc.mpd",
             aspectratio: '16:9',
             width: '100%',
             autostart: true,
@@ -70,8 +69,8 @@
             },
             drm: {
                 "clearkey": {
-                    "keyId": "cb5ea7b04ea41d4fa73fddd783878558",
-                    "key": "a71e6989896660cda4c0d7ce27efa350"
+                    "keyId": "d847f474899bd7741a2e4861c35a3824",
+                    "key": "b71365534a306e2506102f6fd5e14863"
                 }
             }
         });
@@ -93,9 +92,44 @@
         });
     </script>
 <!-- Anti-Adblock Popup -->
+<div class="adb" id="adb" style="display: none;">
+    <div class="adbs">
+        <h3>Adblock Detected</h3>
+        <p>Please disable adblock to proceed to the destination page</p>
+    </div>
+</div>
+
+<style>
+    .adb {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(51, 51, 51, 0.9);
+        z-index: 10000;
+        text-align: center;
+        color: #111;
+    }
+
+    .adbs {
+        margin: 0 auto;
+        width: auto;
+        min-width: 400px;
+        position: fixed;
+        z-index: 99999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 30px 30px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+    }
+</style>
 
 
 </body>
-  
+
 
 </html>
