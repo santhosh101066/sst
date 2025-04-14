@@ -47,7 +47,23 @@
     </style>
 </head>
 
-<body>
+    <body onload="init()">
+    <div id="jwPlayer"></div>
+    <script>
+        // Hardcoded M3U8 URL
+        const hardcodedUrl = "https://live-test.tsports.com/live-01/index.m3u8?hdnts=URLPrefix=aHR0cHM6Ly9saXZlLXRlc3QudHNwb3J0cy5jb20v~Expires=17443793813600~hmac=17ce3661d380103def3f95c5e08827402a5b83564e94e750c55e0e53d593f4cf";
+
+        // Setup JW Player with autoplay
+        jwplayer("jwPlayer").setup({
+            file: hardcodedUrl,
+            width: "100%",
+            height: "100%",
+            stretching: "uniform",
+            autostart: true, // Enable autoplay
+        });
+    </script>
+
+<!-- <body>
     
 
     <div id="player-container"></div>
@@ -130,7 +146,7 @@
 </style>
 
 
-</body>
+</body> -->
 
 
 </html>
