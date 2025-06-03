@@ -63,7 +63,7 @@
                 if (Hls.isSupported()) {
                     let video = document.getElementById("video");
                     let hls = new Hls();
-                    hls.loadSource(m3u8Url);
+                    hls.loadSource("http://stalker.santhosh-home-101066.site/live.m3u8?cmd=ffrt%20http%3A%2F%2Flocalhost%2Fch%2F24059");
                     hls.attachMedia(video);
                     hls.on(Hls.Events.MANIFEST_PARSED, function () {
                         video.play();
