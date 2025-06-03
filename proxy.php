@@ -1,14 +1,9 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/vnd.apple.mpegurl");
+header("Content-Type: text/plain"); // returning a URL as plain text
 
-$api_url = "https://stalker.santhosh-home-101066.site/live.m3u8?cmd=ffrt%20http%3A%2F%2Flocalhost%2Fch%2F24059"; // API URL
+$api_url = "https://stalker.santhosh-home-101066.site/live.m3u8?cmd=ffrt%20http%3A%2F%2Flocalhost%2Fch%2F24059";
 
-$m3u8_url = file_get_contents($api_url);
-
-if ($m3u8_url) {
-    echo $m3u8_url;
-} else {
-    echo "Error fetching stream URL";
-}
+// Instead of downloading the content, just echo the URL
+echo $api_url;
 ?>
